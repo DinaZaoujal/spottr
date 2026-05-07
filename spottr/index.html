@@ -99,7 +99,7 @@
             </div>
         </section>
 
-        <!-- CTA Section -->
+        <!-- CTA Section --> 
         <section class="cta-section">
             <div class="container">
                 <h2>Try it right now</h2>
@@ -197,6 +197,14 @@
             navToggle.classList.toggle('open');
         });
 
+        document.addEventListener('click', (e) => {
+            if (mainNav.classList.contains('open') &&
+                !mainNav.contains(e.target) &&
+                !navToggle.contains(e.target)) {
+                closeNav();
+            }
+        });
+
         function closeNav() {
             mainNav.classList.remove('open');
             navToggle.classList.remove('open');
@@ -204,6 +212,7 @@
 
         // Navigation
         function goHome() {
+            closeNav();
             document.getElementById('homePage').classList.remove('hidden');
             document.getElementById('detectorPage').classList.remove('active');
             window.scrollTo(0, 0);
@@ -359,7 +368,7 @@
                 alert('Please paste a URL');
                 return;
             }
-
+//test
             document.getElementById('loading').style.display = 'block';
             document.getElementById('results').style.display = 'none';
 
