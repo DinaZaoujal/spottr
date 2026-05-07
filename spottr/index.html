@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spottr - Fake News Detector</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HOME PAGE -->
+    <div class="home-page" id="homePage">
+        <header>
+            <div class="logo-section" onclick="goHome()">
+                <div class="logo">
+                    <img src="img/yellow logo.svg" width="40" height="40" alt="Spottr logo">
+                </div>
+                <div class="logo-text">Spottr</div>
+            </div>
+            <nav>
+                <a href="#how">How It Works</a>
+                <a href="#why">Why Spottr</a>
+                
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <h1>Find What's <span>Actually True</span></h1>
+                <p>Paste any article. Get instant credibility scores. Know what's real.</p>
+
+                <div class="input-group">
+                    <input type="text" id="homeUrlInput" placeholder="Paste article URL...">
+                    <button class="btn-check" onclick="goToDetector()">
+                        <img src="img/checkit.svg" alt="Check It">
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-works" id="how">
+            <div class="container">
+                <h2>How It Works</h2>
+               
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Drop the link</h3>
+                        <p>Paste any article URL you want to verify</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>AI analyzes</h3>
+                        <p>We check sources, facts, and credibility</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Get the truth</h3>
+                        <p>See what's real and find better sources</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Spottr -->
+        <section class="why-spottr" id="why">
+            <div class="container">
+                <h2>Why Spottr?</h2>
+
+                <div class="benefits">
+                    <div class="benefit">
+                        <div class="benefit-icon"><img src="img/clock.png" width="40" height="40" alt="clock"></div>
+                        <h3>Stop wasting time</h3>
+                        <p>No more endless Googling. Get instant verification with AI-powered fact-checking.</p>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon"><img src="img/check.svg" width="40" height="40" alt="check"></div>
+                        <h3>Know what's real</h3>
+                        <p>See credibility scores, source quality, and bias detection all in one place.</p>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon"><img src="img/error.svg" width="40" height="40" alt="error"></div>
+                        <h3>Avoid BS</h3>
+                        <p>Spot clickbait, propaganda, and misinformation before you share it.</p>
+                    </div>
+                    <div class="benefit">
+                        <div class="benefit-icon"><img src="img/check.svg" width="40" height="40" alt="check"></div>
+                        <h3>Stay informed</h3>
+                        <p>Form opinions based on facts, not fake news. Make better decisions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h2>Try it right now</h2>
+                <p>Paste any article. See if it's legit. Takes 3 seconds.</p>
+                <button class="btn-started" onclick="goToDetector()">Get Started Free →</button>
+                <p style="margin-top: 30px; font-size: 12px; color: #666;">No credit card • No account • Just truth</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-logo">
+                <div class="logo">
+                    <img src="img/yellow logo.svg" width="32" height="32" alt="Spottr logo">
+                </div>
+                <span>Spottr</span>
+            </div>
+            <p>&copy; 2026 Spottr. Helping you find what's actually true.</p>
+        </footer>
+    </div>
+
+    <!-- DETECTOR PAGE -->
+    <div class="detector-page" id="detectorPage">
+        <button class="back-btn" onclick="goHome()">← Back Home</button>
+
+        <div class="container">
+            <div class="detector-header">
+                <div class="logo">
+                    <img src="img/yellow logo.svg" width="40" height="40" alt="Spottr logo">
+                </div>
+                <div class="logo-text">Spottr</div>
+            </div>
+
+            <div class="detector-hero">
+                <h1>Find What's <span>Actually True</span></h1>
+                <p>Paste any article. Get instant credibility scores. Know what's real.</p>
+
+                <div class="detector-input-group">
+                    <input type="text" id="detectorUrlInput" placeholder="Paste article URL...">
+                    <button class="btn-check" id="checkBtn">
+                        <img src="img/checkit.svg" alt="Check It">
+                    </button>
+                </div>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Analyzing article...</p>
+            </div>
+
+            <div class="results" id="results">
+                <div class="result-header">
+                    <div class="url-display" id="resultUrl"></div>
+                </div>
+
+                <div class="score-section">
+                    <div class="score-circle" id="scoreCircle">
+                        <div class="score-inner">
+                            <div class="score-number" id="scoreNumber">0</div>
+                            <div class="score-label">credibility</div>
+                        </div>
+                    </div>
+
+                    <div class="score-info">
+                        <h3 id="scoreTitle">Analysis Result</h3>
+                        <p id="scoreDescription"></p>
+                        <div id="riskBadge" class="risk-badge"></div>
+                    </div>
+                </div>
+
+                <div class="details-section">
+                    <div class="detail-box">
+                        <h4>✓ Positive Indicators</h4>
+                        <ul id="positiveList"></ul>
+                    </div>
+
+                    <div class="detail-box negative">
+                        <h4>⚠ Warning Signs</h4>
+                        <ul id="warningList"></ul>
+                    </div>
+                </div>
+
+                <button class="btn-reset" id="resetBtn">Check Another Article</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation
+        function goHome() {
+            document.getElementById('homePage').classList.remove('hidden');
+            document.getElementById('detectorPage').classList.remove('active');
+            window.scrollTo(0, 0);
+        }
+
+        function goToDetector() {
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('detectorPage').classList.add('active');
+            window.scrollTo(0, 0);
+            document.getElementById('detectorUrlInput').focus();
+        }
+
+        // Demo data generator
+        function generateAnalysis(url) {
+            const analyses = [
+                {
+                    score: 78,
+                    title: 'Likely Reliable',
+                    description: 'This article appears to come from a known news source with credible reporting history. Some minor concerns detected.',
+                    risk: 'low',
+                    riskText: 'Low Risk',
+                    positives: [
+                        'From established news outlet',
+                        'Multiple cited sources',
+                        'Professional writing quality',
+                        'Recent publication date'
+                    ],
+                    warnings: [
+                        'Some sensationalized headlines',
+                        'Limited peer sources'
+                    ]
+                },
+                {
+                    score: 45,
+                    title: 'Questionable Credibility',
+                    description: 'Multiple warning signs detected. This article contains unverified claims and inconsistent sourcing. Recommend further research.',
+                    risk: 'medium',
+                    riskText: 'Medium Risk',
+                    positives: [
+                        'Uses some legitimate sources',
+                        'Readable format'
+                    ],
+                    warnings: [
+                        'Unverified claims present',
+                        'Sensationalized tone',
+                        'Contradictory information',
+                        'Unknown author'
+                    ]
+                },
+                {
+                    score: 22,
+                    title: 'Not Reliable',
+                    description: 'This appears to be misinformation. Multiple red flags detected including false claims, missing sources, and typical fake news patterns.',
+                    risk: 'high',
+                    riskText: 'High Risk - Not Real',
+                    positives: [
+                        'Has article format'
+                    ],
+                    warnings: [
+                        'Fabricated sources',
+                        'False claims detected',
+                        'Extreme clickbait language',
+                        'No author attribution',
+                        'Typical fake news patterns',
+                        'Misleading statistics'
+                    ]
+                },
+                {
+                    score: 89,
+                    title: 'Highly Credible',
+                    description: 'Strong indicators of reliability. Article comes from reputable source with verified facts and transparent sourcing.',
+                    risk: 'low',
+                    riskText: 'Very Low Risk',
+                    positives: [
+                        'Peer-reviewed sources',
+                        'Transparent fact-checking',
+                        'Expert citations',
+                        'Balanced perspective',
+                        'Clear methodology'
+                    ],
+                    warnings: [
+                        'None detected'
+                    ]
+                },
+                {
+                    score: 35,
+                    title: 'Likely Misinformation',
+                    description: 'Strong evidence of false information. Multiple fact-check failures and suspicious patterns identified.',
+                    risk: 'high',
+                    riskText: 'High Risk - Likely Fake',
+                    positives: [
+                        'Formatted as news'
+                    ],
+                    warnings: [
+                        'False headline claims',
+                        'Unverified quotes',
+                        'Photoshopped images detected',
+                        'Inflammatory language',
+                        'No credible sources',
+                        'Proven false before'
+                    ]
+                }
+            ];
+
+            return analyses[Math.floor(Math.random() * analyses.length)];
+        }
+
+        function updateScoreCircle(score) {
+            const angle = (score / 100) * 360;
+            document.getElementById('scoreCircle').style.setProperty('--score-angle', angle + 'deg');
+        }
+
+        function displayResults(url, analysis) {
+            document.getElementById('resultUrl').textContent = url;
+            document.getElementById('scoreNumber').textContent = analysis.score;
+            document.getElementById('scoreTitle').textContent = analysis.title;
+            document.getElementById('scoreDescription').textContent = analysis.description;
+
+            const badge = document.getElementById('riskBadge');
+            badge.textContent = analysis.riskText;
+            badge.className = 'risk-badge risk-' + analysis.risk;
+
+            const positiveList = document.getElementById('positiveList');
+            positiveList.innerHTML = analysis.positives
+                .map(item => `<li><svg width="16" height="16" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                    <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" stroke="#4caf50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M18 24L22 28L30 20" stroke="#4caf50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>${item}</li>`)
+                .join('');
+
+            const warningList = document.getElementById('warningList');
+            warningList.innerHTML = analysis.warnings
+                .map(item => `<li><svg width="16" height="16" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                    <path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" stroke="#ff6b6b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M30 18L18 30" stroke="#ff6b6b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M18 18L30 30" stroke="#ff6b6b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>${item}</li>`)
+                .join('');
+
+            updateScoreCircle(analysis.score);
+        }
+
+        // Detector events
+        const checkBtn = document.getElementById('checkBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const detectorUrlInput = document.getElementById('detectorUrlInput');
+        const homeUrlInput = document.getElementById('homeUrlInput');
+
+        checkBtn.addEventListener('click', () => {
+            const url = detectorUrlInput.value.trim();
+
+            if (!url) {
+                alert('Please paste a URL');
+                return;
+            }
+
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').style.display = 'none';
+
+            setTimeout(() => {
+                const analysis = generateAnalysis(url);
+                displayResults(url, analysis);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results').style.display = 'block';
+            }, 2000);
+        });
+
+        resetBtn.addEventListener('click', () => {
+            detectorUrlInput.value = '';
+            document.getElementById('results').style.display = 'none';
+            detectorUrlInput.focus();
+        });
+
+        detectorUrlInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                checkBtn.click();
+            }
+        });
+
+        homeUrlInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                goToDetector();
+                setTimeout(() => {
+                    detectorUrlInput.value = homeUrlInput.value;
+                    checkBtn.click();
+                }, 100);
+            }
+        });
+    </script>
+</body>
+</html>
