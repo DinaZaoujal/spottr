@@ -10,17 +10,23 @@
     <!-- HOME PAGE -->
     <div class="home-page" id="homePage">
         <header>
-            <div class="logo-section" onclick="goHome()">
-                <div class="logo">
-                    <img src="img/yellow logo.svg" width="40" height="40" alt="Spottr logo">
+            <div class="container header-inner">
+                <div class="logo-section" onclick="goHome()">
+                    <div class="logo">
+                        <img src="img/yellow logo.svg" width="40" height="40" alt="Spottr logo">
+                    </div>
+                    <div class="logo-text">Spottr</div>
                 </div>
-                <div class="logo-text">Spottr</div>
+                <nav id="mainNav">
+                    <a href="#how" onclick="closeNav()">How It Works</a>
+                    <a href="#why" onclick="closeNav()">Why Spottr</a>
+                </nav>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
-            <nav>
-                <a href="#how">How It Works</a>
-                <a href="#why">Why Spottr</a>
-                
-            </nav>
         </header>
 
         <!-- Hero Section -->
@@ -182,6 +188,20 @@
     </div>
 
     <script>
+        // Hamburger nav toggle
+        const navToggle = document.getElementById('navToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        navToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('open');
+            navToggle.classList.toggle('open');
+        });
+
+        function closeNav() {
+            mainNav.classList.remove('open');
+            navToggle.classList.remove('open');
+        }
+
         // Navigation
         function goHome() {
             document.getElementById('homePage').classList.remove('hidden');
